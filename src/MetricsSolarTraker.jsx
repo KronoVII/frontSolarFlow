@@ -36,9 +36,28 @@ const MetricsSolarTracker = () => {
     };
   }, []);
 
+  const getDaysSinceUpdate = (lastUpdateDate) => {
+    const lastUpdate = new Date(lastUpdateDate);
+    const now = new Date();
+    const diffTime = Math.abs(now - lastUpdate);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    return diffDays;
+  };
+
   return (
     <div style={{ padding: '20px', fontFamily: 'sans-serif', color: 'white', background: '#222' }}>
-      <h2>Historial de Pitch & Yaw</h2>
+      <h2 style={{
+        fontSize: '2.5rem',
+        fontWeight: 'bold',
+        color: '#FFD700', // dorado como el sol
+        textAlign: 'center',
+        textShadow: '2px 2px 5px #000',
+        marginBottom: '1rem'
+      }}>
+        Sun Tracker
+      </h2>
+
+      <h3>Historial de Pitch & Yaw</h3>
       <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: '1rem' }}>
         <thead>
           <tr style={{ textAlign: 'left', borderBottom: '2px solid #444' }}>
@@ -66,11 +85,16 @@ const MetricsSolarTracker = () => {
           <p><strong>Humedad:</strong> {weather.relative_humidity_2m}%</p>
           <p><strong>Velocidad del viento:</strong> {weather.wind_speed_10m} m/s</p>
           <p><strong>Dirección del viento:</strong> {weather.wind_direction_10m}°</p>
-          <p><strong>Presión atmosférica:</strong> {weather.pressure_msl} hPa</p>
           <p><strong>Probabilidad de lluvia:</strong> {weather.precipitation_probability}%</p>
         </div>
       )}
+      <div style={{ marginTop: '2rem', fontSize: '0.9rem', color: '#aaa' }}>
+        <p>Versión de la Aplicación: 2.5.0v</p>
+      </div>
     </div>
+
+
+
   );
 };
 
